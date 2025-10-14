@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Modelo 3D Neil Armstrong</title>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #000;
+    }
+    model-viewer {
+      width: 80vw;
+      height: 80vh;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Modelo 3D con model-viewer -->
+  <model-viewer 
+    alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum"
+    src="shared-assets/models/NeilArmstrong.glb" 
+    ar 
+    environment-image="shared-assets/environments/moon_1k.hdr" 
+    poster="shared-assets/models/NeilArmstrong.webp" 
+    shadow-intensity="1" 
+    camera-controls 
+    touch-action="pan-y">
+  </model-viewer>
+
+</body>
+</html>
