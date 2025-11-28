@@ -3,44 +3,90 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Test AR con cambio de modelos</title>
+  <title>AR con Cambio de Modelos</title>
 
+  <!-- Model Viewer -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <style>
-    html, body { height:100%; margin:0; background:#111; display:flex; flex-direction:column; }
-    model-viewer { width:100%; height:100%; flex:1; }
+    html, body {
+      height:100%;
+      margin:0;
+      background:#0b0b0b;
+      display:flex;
+      flex-direction:column;
+      font-family:Arial, sans-serif;
+    }
+
+    model-viewer {
+      width:100%;
+      height:100%;
+      flex:1;
+      background:#111;
+    }
+
+    /* 🔥 Cinta de botones estilizada */
     .botones {
       display:flex;
       justify-content:center;
-      gap:10px;
-      padding:10px;
+      gap:15px;
+      padding:15px;
       background:#000;
+      border-bottom:2px solid #222;
     }
-    button {
-      padding:10px 20px;
-      border:none;
-      background:#444;
+
+    /* 🎨 Botones llamativos */
+    .btn-modelo {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:12px 20px;
+      background:#1e88e5; /* Azul intenso */
       color:white;
       font-weight:bold;
-      border-radius:5px;
+      border-radius:8px;
+      border:none;
       cursor:pointer;
+      font-size:15px;
+      box-shadow:0 0 10px rgba(0, 150, 255, .4);
+      transition:0.2s;
     }
-    button:hover {
-      background:#666;
+
+    .btn-modelo:hover {
+      background:#42a5f5;
+      box-shadow:0 0 14px rgba(0, 150, 255, .8);
+    }
+
+    /* Iconos */
+    .material-icons {
+      font-size:20px;
     }
   </style>
 </head>
 <body>
 
-  <!-- 🔘 BOTONES PARA CAMBIAR MODELO -->
+  <!-- 🔘 FILA DE BOTONES -->
   <div class="botones">
-    <button onclick="cambiarModelo('torax.glb', 'torax.usdz')">Modelo 1</button>
-    <button onclick="cambiarModelo('craneo.glb', 'craneo.usdz')">Modelo 2</button>
-    <button onclick="cambiarModelo('bolon.glb', 'bolon.usdz')">Modelo 3</button>
+    <button class="btn-modelo" onclick="cambiarModelo('torax.glb', 'torax.usdz')">
+      <span class="material-icons">favorite</span>
+      Torax
+    </button>
+
+    <button class="btn-modelo" onclick="cambiarModelo('craneo.glb', 'craneo.usdz')">
+      <span class="material-icons">skull</span> <!-- algunos dispositivos no cargan skull; alternativo abajo -->
+      Cráneo
+    </button>
+
+    <button class="btn-modelo" onclick="cambiarModelo('bolon.glb', 'bolon.usdz')">
+      <span class="material-icons">accessibility_new</span>
+      Pelvis
+    </button>
   </div>
 
-  <!-- 👇 VISOR MODEL-VIEWER -->
+  <!-- 👇 VISOR 3D -->
   <model-viewer
     id="visor"
     src="torax.glb"
@@ -51,7 +97,7 @@
     alt="Modelo en 3D">
   </model-viewer>
 
-  <!-- ⭐ SCRIPT PARA CAMBIO DE MODELO -->
+  <!-- ⭐ SCRIPT: CAMBIO DE MODELO -->
   <script>
     function cambiarModelo(src, iosSrc) {
       const visor = document.getElementById('visor');
@@ -62,4 +108,3 @@
 
 </body>
 </html>
-
