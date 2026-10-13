@@ -1,0 +1,11 @@
+EXPERIENCIA AR · NEGOCIOS DIGITALES UPS
+
+Incluye cinco pares GLB/USDZ reales: bitcoin, dinero, carrito, gráficas y robot IA.
+La sexta experiencia, gafas de realidad virtual, está configurada para modelos/bolon.glb y modelos/bolon.usdz.
+Estos archivos aún no han sido adjuntados: cópialos en la carpeta modelos/ para activarla.
+La camiseta geff_italy_guardia_di_finanza fue excluida por ser incorrecta.
+
+Publicar toda la carpeta en hosting HTTPS para AR en móviles compatibles.
+Pruebas locales: python -m http.server 8000 y abrir http://localhost:8000.
+En Android funciona con WebXR/Scene Viewer cuando el dispositivo es compatible; en iOS Quick Look utiliza USDZ.
+La ficha informativa aparece en la web y no necesariamente dentro del visor AR nativo.

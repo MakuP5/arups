@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#092b56">
+  <title>Explora Negocios Digitales | UPS</title>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--azul:#073b7a;--azul2:#1456a0;--amarillo:#ffcf32;--bg:#06162c;--card:#0b2649;--text:#f4f8ff;--muted:#b5c8df}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,Arial,sans-serif;color:var(--text);background:var(--bg)}
+    body{background:radial-gradient(ellipse at 82% 2%,#1b497d 0,transparent 40%),linear-gradient(145deg,#06182f,#071327)}
+    .app{max-width:1500px;margin:auto;padding:clamp(12px,2vw,28px);min-height:100dvh;display:flex;flex-direction:column;gap:17px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:12px}.brand-mark{background:var(--amarillo);color:#073b7a;border-radius:14px;padding:11px 12px;font-size:22px;font-weight:900;letter-spacing:-1px}.brand strong{display:block;font-size:clamp(16px,2vw,22px)}.brand small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+    .tag{font-size:12px;letter-spacing:1px;font-weight:800;border:1px solid #42658b;border-radius:99px;padding:9px 14px;color:#d2eaff}
+    .intro{padding:3px 0}.eyebrow{color:var(--amarillo);font-weight:800;font-size:12px;letter-spacing:2px;text-transform:uppercase}.intro h1{font-size:clamp(26px,3.6vw,48px);line-height:1.12;margin:9px 0}.intro p{color:var(--muted);margin:0;font-size:clamp(13px,1.5vw,16px);line-height:1.5}
+    .selector{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+    .choice{border:1px solid #31567d;background:#0e2c51;color:#ecf6ff;border-radius:16px;padding:14px 8px;min-height:82px;display:flex;align-items:center;justify-content:center;gap:8px;flex-direction:column;cursor:pointer;transition:transform .18s,border-color .18s,background .18s;text-align:center;font-size:13px;font-weight:800}
+    .choice:hover{transform:translateY(-2px);border-color:#a8d5ff}.choice[aria-pressed="true"]{background:var(--amarillo);border-color:var(--amarillo);color:#082749;box-shadow:0 9px 28px #ffcf3229}.choice .emoji{font-size:27px}
+    main{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(300px,.7fr);gap:16px;flex:1;min-height:440px}
+    .viewer-wrap{position:relative;min-height:440px;background:radial-gradient(circle at 45% 46%,#214d7d,#092344 54%,#071a34 100%);border:1px solid #335779;border-radius:23px;overflow:hidden}
+    model-viewer{width:100%;height:100%;min-height:440px;--poster-color:transparent;outline:none}
+    .float-label{position:absolute;top:16px;left:16px;pointer-events:none;background:#06182fbb;border:1px solid #4a7199;border-radius:99px;padding:9px 13px;font-size:12px;font-weight:700}
+    .ar-button{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);border:0;border-radius:99px;background:var(--amarillo);color:#072b55;padding:15px 22px;font-size:14px;font-weight:900;white-space:nowrap;box-shadow:0 7px 24px #0007;cursor:pointer;display:none;align-items:center;gap:10px;z-index:2}
+    .ar-button:focus-visible,.choice:focus-visible{outline:3px solid white;outline-offset:3px}
+    .viewer-hint{position:absolute;bottom:8px;right:12px;font-size:11px;color:#b9cde4;pointer-events:none}
+    .info{display:flex;flex-direction:column;justify-content:center;background:linear-gradient(165deg,#10365f,#092443);border:1px solid #315c86;border-radius:23px;padding:clamp(22px,3vw,36px)}
+    .info .num{font-weight:900;color:var(--amarillo);font-size:12px;letter-spacing:2px}.info h2{font-size:clamp(25px,2.7vw,38px);line-height:1.12;margin:12px 0 18px}.info .description{font-size:clamp(15px,1.6vw,19px);line-height:1.55;color:#e2efff;margin:0 0 25px}
+    .sectiontitle{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#a7c7ec;font-weight:800}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.chip{background:#194671;border:1px solid #38658c;border-radius:99px;padding:8px 12px;font-size:12px;font-weight:700}
+    .future{border-top:1px solid #315779;padding-top:18px;margin-top:24px;color:#c9def6;line-height:1.5;font-size:14px}.future b{color:var(--amarillo)}
+    footer{text-align:center;color:#9cb8d8;font-size:12px;padding:3px 0 9px}
+    .message{position:absolute;top:54px;left:16px;right:16px;color:#ffd4d4;font-size:13px;display:none;max-width:500px;border:1px solid #b64f4f;background:#441d2eea;padding:11px;border-radius:9px}
+    @media(max-width:850px){main{grid-template-columns:1fr}.viewer-wrap,model-viewer{min-height:390px;height:390px}.info{min-height:unset}.selector{grid-template-columns:repeat(6,minmax(126px,1fr));overflow-x:auto;padding:0 0 7px;scroll-snap-type:x mandatory}.choice{scroll-snap-align:start}.tag{display:none}}
+    @media(max-width:500px){.app{padding:13px;gap:13px}.selector{grid-template-columns:repeat(6,125px)}.choice{min-height:73px}.viewer-wrap,model-viewer{min-height:325px;height:325px}.info{padding:22px}.info h2{margin:9px 0 12px}.info .description{margin-bottom:17px}.ar-button{bottom:23px;font-size:12px;padding:13px 14px}.viewer-hint{display:none}}
+    @media(prefers-reduced-motion:reduce){.choice{transition:none}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header><div class="brand"><div class="brand-mark" aria-label="UPS">UPS</div><div><strong>Negocios Digitales</strong><small>Universidad Politécnica Salesiana · Experiencia de admisiones</small></div></div><span class="tag">6 EXPERIENCIAS · REALIDAD AUMENTADA</span></header>
+  <section class="intro"><div class="eyebrow">Descubre el futuro profesional</div><h1>¿Qué puedes crear con Negocios Digitales?</h1><p>Elige un modelo, explóralo en 3D y colócalo sobre una superficie con la cámara de tu celular.</p></section>
+  <nav class="selector" aria-label="Seleccionar experiencia">
+    <button class="choice" data-key="bitcoin" aria-pressed="true"><span class="emoji">₿</span><span>Blockchain</span></button>
+    <button class="choice" data-key="dinero" aria-pressed="false"><span class="emoji">💸</span><span>Finanzas digitales</span></button>
+    <button class="choice" data-key="vr" aria-pressed="false"><span class="emoji">🥽</span><span>Experiencias inmersivas</span></button>
+    <button class="choice" data-key="carrito" aria-pressed="false"><span class="emoji">🛒</span><span>Comercio electrónico</span></button>
+    <button class="choice" data-key="datos" aria-pressed="false"><span class="emoji">📊</span><span>Analítica de datos</span></button>
+    <button class="choice" data-key="ia" aria-pressed="false"><span class="emoji">🤖</span><span>Inteligencia artificial</span></button>
+  </nav>
+  <main>
+    <section class="viewer-wrap" aria-label="Visor tridimensional"><div class="float-label">✦ Explorador 3D + AR</div>
+      <model-viewer id="visor" src="modelos/bitcoin.glb" alt="Modelo 3D de Bitcoin relacionado con blockchain" camera-controls auto-rotate rotation-per-second="12deg" shadow-intensity="1" environment-image="neutral" exposure="1" interaction-prompt="auto" ar ar-modes="webxr scene-viewer quick-look" ar-placement="floor" ar-scale="auto" loading="eager" reveal="auto">
+        <button id="btnAR" class="ar-button" slot="ar-button" type="button">📱 Ver sobre una superficie</button>
+      </model-viewer>
+      <div id="err" class="message" role="alert"></div><div class="viewer-hint">↻ Arrastra para girar · Pellizca para acercar</div>
+    </section>
+    <article class="info" aria-live="polite"><div id="number" class="num">EXPERIENCIA 01 / 06</div><h2 id="title">Blockchain y activos digitales</h2><p id="description" class="description">Descubre cómo la tecnología blockchain permite registrar transacciones y desarrollar nuevas soluciones para negocios digitales.</p><div class="sectiontitle">Tecnologías que explorarás</div><div id="chips" class="chips"><span class="chip">Blockchain</span><span class="chip">Criptoactivos</span><span class="chip">Innovación financiera</span></div><div id="future" class="future"><b>¿Dónde podrías trabajar?</b> En proyectos de innovación financiera, tecnología y transformación digital.</div></article>
+  </main>
+  <footer>UPS · Carrera de Negocios Digitales · Explora, experimenta e imagina tu futuro.</footer>
+</div>
+<script>
+  // Cinco modelos incluidos; gafas VR: agregar bolon.glb y bolon.usdz a modelos/.
+  const experiencias = {
+    bitcoin:{archivo:'modelos/bitcoin.glb',ios:'modelos/bitcoin.usdz',nombre:'Blockchain y activos digitales',desc:'Descubre cómo la tecnología blockchain permite registrar transacciones y desarrollar nuevas soluciones para negocios digitales.',tech:['Blockchain','Criptoactivos','Innovación financiera'],futuro:'En proyectos de innovación financiera, tecnología y transformación digital.',alt:'Modelo tridimensional de Bitcoin para explicar blockchain'},
+    dinero:{archivo:'modelos/money_stacks_set.glb',ios:'modelos/money_stacks_set.usdz',nombre:'Finanzas y emprendimientos digitales',desc:'Aprende a convertir una idea en un negocio, analizar sus ingresos y tomar decisiones para hacerlo crecer de forma sostenible.',tech:['Fintech','Modelos de negocio','Finanzas digitales'],futuro:'En startups, emprendimientos, empresas financieras y proyectos de innovación.',alt:'Modelo tridimensional de una pila de dinero para explicar finanzas digitales'},
+    vr:{archivo:'modelos/bolon.glb',ios:'modelos/bolon.usdz',nombre:'Realidad virtual y experiencias inmersivas',desc:'Imagina tiendas virtuales, demostraciones de productos y espacios interactivos que conectan marcas con las personas.',tech:['Realidad virtual','Experiencias 3D','Marketing inmersivo'],futuro:'En agencias digitales, innovación, experiencias de marca y comercio inmersivo.',alt:'Modelo tridimensional de gafas de realidad virtual'},
+    carrito:{archivo:'modelos/shopping_cart.glb',ios:'modelos/shopping_cart.usdz',nombre:'Comercio electrónico',desc:'Descubre cómo crear tiendas online y diseñar experiencias de compra sencillas, seguras y atractivas para clientes de todo el mundo.',tech:['E-commerce','Pagos digitales','Marketing digital'],futuro:'En tiendas online, marketplaces, emprendimientos y áreas comerciales.',alt:'Modelo tridimensional de un carrito de compras'},
+    datos:{archivo:'modelos/grafico02_04.glb',ios:'modelos/grafico02_04.usdz',nombre:'Analítica de datos e inteligencia de negocios',desc:'Convierte números y gráficos en respuestas: descubre qué buscan los clientes y cómo mejorar decisiones con datos.',tech:['Business Intelligence','Visualización de datos','Inteligencia artificial'],futuro:'En equipos de analítica, marketing, consultoría y estrategia empresarial.',alt:'Modelo tridimensional de gráficas de datos'},
+    ia:{archivo:'modelos/smiling_robot_waving.glb',ios:'modelos/smiling_robot_waving.usdz',nombre:'Inteligencia artificial para los negocios',desc:'¿Te imaginas crear asistentes inteligentes que atiendan clientes, recomienden productos y ayuden a resolver problemas reales? Descubre cómo la IA transforma las empresas.',tech:['Inteligencia artificial','Asistentes virtuales','Automatización'],futuro:'En innovación empresarial, automatización de procesos, analítica e implementación de soluciones con IA.',alt:'Robot sonriente que representa la inteligencia artificial'}
+  };
+  const keys=Object.keys(experiencias), visor=document.getElementById('visor'), err=document.getElementById('err');
+  function seleccionar(key){const d=experiencias[key];if(!d)return;
+    visor.src=d.archivo;visor.alt=d.alt;
+    // El modelo bolon se incorpora al recibir sus archivos: si falta se informa sin sustituirlo por otro.
+    if(d.ios){visor.setAttribute('ios-src',d.ios)}else{visor.removeAttribute('ios-src')}
+    document.getElementById('number').textContent=`EXPERIENCIA ${String(keys.indexOf(key)+1).padStart(2,'0')} / 06`;
+    document.getElementById('title').textContent=d.nombre;
+    document.getElementById('description').textContent=d.desc;
+    document.getElementById('chips').replaceChildren(...d.tech.map(t=>{const el=document.createElement('span');el.className='chip';el.textContent=t;return el}));
+    document.getElementById('future').replaceChildren();let strong=document.createElement('b');strong.textContent='¿Dónde podrías trabajar?';document.getElementById('future').append(strong,document.createTextNode(' '+d.futuro));
+    document.querySelectorAll('.choice').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.key===key)));
+    err.style.display='none';
+  }
+  document.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>seleccionar(b.dataset.key)));
+  visor.addEventListener('error',()=>{err.textContent=visor.src.includes('bolon.glb') ? 'Para mostrar las gafas VR, agrega bolon.glb y bolon.usdz a la carpeta modelos/. Este modelo todavía no está incluido.' : 'No se pudo cargar el modelo 3D. Revisa el archivo en modelos/ y usa un servidor web (HTTPS para AR).';err.style.display='block'});
+  // El slot ar-button de model-viewer activa AR automáticamente en dispositivos compatibles.
+  // El botón del slot "ar-button" solo se muestra cuando AR está disponible.
+  seleccionar('bitcoin');
+</script>
+</body>
+</html>
